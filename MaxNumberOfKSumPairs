@@ -1,0 +1,32 @@
+/*
+
+Understand - We are finding the max no. of pairs that add up to k.
+Match - hashmap
+
+Plan - 
+1. Loop through each element with an index i. Set operations = 0
+2. if an element is found in the hashmap that adds up to k with the current element, increment operations by 1. 
+3. If not, push that into the hashmap or increment its value by 1.
+4. Return operations.
+
+Runtime = O(n)
+
+*/
+
+using namespace std;
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        unordered_map<int, int> table;
+        int operations = 0;
+
+        for (int i = 0; i < nums.size(); i++){
+            if (table[k - nums[i]] > 0){
+                table[k - nums[i]]--;
+                operations++;
+            }
+            else table[nums[i]]++;
+        }
+        return operations;
+    }
+};
